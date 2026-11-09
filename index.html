@@ -1,266 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BillCraft — Free Invoice Generator | PDF Export, No Signup</title>
-  <meta name="description" content="Free professional invoice generator. Create invoices in 60 seconds with one-click PDF export. No signup, no backend, no subscription. 3 templates, 7 currencies, works offline.">
-  <meta name="keywords" content="invoice generator, free invoice, PDF invoice, invoice template, freelancer invoice, billing tool, offline invoice">
-  <meta name="author" content="BillCraft">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://billcraft-demo.surge.sh/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="BillCraft — Free Invoice Generator">
-  <meta property="og:description" content="Create professional invoices in 60 seconds. Free, no signup, one-click PDF export. 3 templates, 7 currencies.">
-  <meta property="og:url" content="https://billcraft-demo.surge.sh/">
-  <meta property="og:site_name" content="BillCraft">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BillCraft — Free Invoice Generator">
-  <meta name="twitter:description" content="Create professional invoices in 60 seconds. No signup, no backend, works offline.">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BillCraft",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Any (Browser-based)",
-    "description": "Free professional invoice generator with one-click PDF export. No signup required.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: {
-        brand: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81' }
-      }}}
-    }
-  </script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e9e7fb">
+<title>فاکتورساز | Invoice Maker</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--ac:#4f46e5;--ac2:#818cf8;--ink:#1f2140;--muted:#7a7c99;--glass:rgba(255,255,255,.62);--line:rgba(120,120,170,.18);--f:'Vazirmatn',Tahoma,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);color:var(--ink);min-height:100vh;
+background:radial-gradient(600px 420px at 85% -5%,#c9c5f7,transparent 70%),radial-gradient(520px 420px at 0% 30%,#fde3cf,transparent 70%),radial-gradient(600px 500px at 100% 100%,#d4ecf7,transparent 70%),#f4f3fb;background-attachment:fixed}
+button,input,select,textarea{font:inherit;color:inherit}
+header{position:sticky;top:0;z-index:20;margin:12px auto 0;max-width:1240px;width:calc(100% - 24px);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 16px;border-radius:26px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid #fff;box-shadow:0 10px 30px #4f46e514}
+.brand{font-weight:800;font-size:19px;display:flex;align-items:center;gap:9px}
+.brand i{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--ac2),var(--ac));display:grid;place-items:center;color:#fff;font-style:normal;box-shadow:0 6px 14px #4f46e555}
+.acts{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:999px;padding:9px 16px;cursor:pointer;font-weight:700;font-size:13px;transition:.15s}
+.btn:active{transform:scale(.96)}
+.b-main{background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;box-shadow:0 8px 18px #4f46e544}
+.b-soft{background:#fff;box-shadow:0 2px 8px #4f46e514}
+.b-red{background:#fde8ea;color:#c42b3b}
+.lang{border:0;border-radius:999px;padding:9px 12px;background:#fff;cursor:pointer;font-size:13px}
+.wrap{max-width:1240px;margin:16px auto 90px;padding:0 12px;display:grid;grid-template-columns:minmax(330px,.9fr) minmax(340px,1.1fr);gap:16px;align-items:start}
+.card{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid #fff;border-radius:28px;padding:18px;box-shadow:0 14px 40px #4f46e512;margin-bottom:14px}
+h2{font-size:14px;margin:0 0 12px;color:var(--ac);font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.field label{font-size:11.5px;color:var(--muted)}
+input,textarea,select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.8);outline:0;min-width:0;font-size:13px}
+input:focus,textarea:focus,select:focus{border-color:var(--ac2);box-shadow:0 0 0 3px #818cf833}
+textarea{resize:vertical;min-height:62px}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.pill{border:0;border-radius:999px;padding:8px 15px;background:#e3e6fb;color:var(--ac);font-weight:700;font-size:12.5px;cursor:pointer}
+.pill.on{background:var(--ac);color:#fff;box-shadow:0 6px 14px #4f46e544}
+.sw{width:30px;height:30px;padding:0;border:3px solid #fff;box-shadow:0 2px 8px #0002}
+.sw.on{outline:2px solid var(--ink)}
+.ih,.ir{display:grid;grid-template-columns:minmax(90px,2fr) 56px 92px 100px 34px;gap:6px;align-items:center}
+.ih{font-size:11px;color:var(--muted);padding:0 4px 6px}
+.ir{margin-bottom:7px}.ir input{padding:10px 8px;font-size:12px;border-radius:13px}
+.rm{border:0;width:32px;height:32px;border-radius:50%;background:#fde8ea;color:#c42b3b;cursor:pointer;font-size:16px}
+.fab{position:fixed;bottom:20px;left:20px;width:56px;height:56px;border-radius:50%;border:0;font-size:28px;color:#fff;background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 12px 26px #4f46e566;cursor:pointer;z-index:15}
+.dt{cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%234f46e5' stroke-width='2' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M8 3v4M16 3v4M3 10h18'/%3E%3C/svg%3E") no-repeat 12px center}
+.logoBox{display:flex;align-items:center;gap:10px}
+.logoBox img{width:44px;height:44px;border-radius:12px;object-fit:cover;display:none}
+.ptop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}
+.pv{overflow-x:auto;border-radius:22px}
+/* paper */
+.paper{background:#fff;width:100%;min-height:640px;border-radius:22px;overflow:hidden;box-shadow:0 18px 50px #4f46e51f;font-size:12px;position:relative}
+.ph{padding:26px 28px 40px;color:#fff;background:linear-gradient(135deg,var(--ac2),var(--ac));display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.ph h1{margin:0 0 4px;font-size:30px;font-weight:800}
+.ph p{margin:3px 0;opacity:.9;white-space:pre-line}
+.ph img{width:54px;height:54px;border-radius:14px;object-fit:cover;background:#fff;margin-bottom:8px;display:none}
+.meta{background:rgba(255,255,255,.2);border-radius:18px;padding:10px 14px;line-height:2;min-width:170px}
+.badge{display:inline-block;border-radius:999px;padding:3px 13px;font-weight:700;font-size:11px;margin-top:6px;background:#fff}
+.s-paid{color:#0f9d6a}.s-pending{color:#d98a0b}.s-overdue{color:#d6293e}
+.pb{padding:0 28px 26px;margin-top:-18px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.pbox{background:#fff;border:1px solid #e7e8f7;border-radius:18px;padding:12px 14px;box-shadow:0 6px 18px #4f46e50f}
+.pbox h3{margin:0 0 6px;font-size:11px;color:var(--ac)}.pbox p{margin:0;line-height:1.9;white-space:pre-line}
+table{width:100%;border-collapse:separate;border-spacing:0 5px}
+th{font-size:11px;color:var(--ac);text-align:right;padding:6px 8px}
+td{padding:10px 8px;background:#f4f4fd}
+td:first-child{border-radius:0 14px 14px 0}td:last-child{border-radius:14px 0 0 14px}
+.n{text-align:left;white-space:nowrap}
+.tot{width:min(100%,290px);margin:14px auto 0 0;background:#f4f4fd;border-radius:20px;padding:8px 16px}
+.tr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed #d4d5ee}
+.tr.f{border:0;font-size:16px;font-weight:800;color:var(--ac)}
+.notes{margin-top:18px;line-height:1.9;white-space:pre-line;color:#4a4c70}
+.foot{text-align:center;color:var(--muted);font-size:10.5px;margin-top:22px}
+/* calendar modal */
+.ov{position:fixed;inset:0;background:#1f214066;backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:50}
+.ov.on{display:flex}
+.cal{width:min(340px,92vw);background:linear-gradient(160deg,#f1efff,#fff4ea);border:1px solid #fff;border-radius:30px;padding:16px;box-shadow:0 30px 70px #1f214055}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-weight:800}
+.nav{border:0;width:34px;height:34px;border-radius:12px;background:#fff;cursor:pointer;font-size:16px;color:var(--ac)}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
+.cg b{font-size:11px;color:var(--muted);padding:4px 0}
+.cd{border:0;aspect-ratio:1;border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;font-size:13px}
+.cd.today{outline:2px solid var(--ac2)}
+.cd.sel{background:var(--ac);color:#fff;box-shadow:0 6px 12px #4f46e555}
+.cd.fri{color:#d6293e}
+.cf{display:flex;justify-content:space-between;margin-top:12px}
+.stage{position:fixed;left:-99999px;top:0;width:794px}
+@media(max-width:880px){.wrap{grid-template-columns:1fr}.preview{order:2}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.ih,.ir{grid-template-columns:minmax(70px,1.5fr) 44px 70px 78px 30px;gap:4px}.ph{flex-direction:column}.parties{grid-template-columns:1fr}}
+@media print{body{background:#fff}header,.form,.ptop,.fab,.ov{display:none!important}.wrap{display:block;margin:0;padding:0}.paper{box-shadow:none;border-radius:0}@page{size:A4;margin:8mm}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
 </head>
-<body class="bg-slate-50 min-h-screen">
-
-  <!-- Navbar -->
-  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
-    <div class="max-w-[1800px] mx-auto px-3 flex items-center justify-between h-14">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        </div>
-        <span class="font-bold text-lg text-slate-800">Bill<span class="text-brand-600">Craft</span></span>
-      </div>
-      <div class="flex items-center gap-1.5 flex-wrap">
-        <select id="lang-switch" onchange="App.setLang(this.value)" class="field-input-sm w-16 text-center border border-slate-200 rounded-md px-1 py-1 text-xs">
-          <option value="en">EN</option>
-          <option value="zh">中文</option>
-          <option value="fa">فارسی</option>
-        </select>
-        <button onclick="App.newInvoice()" class="btn-nav" data-t="navNew">New</button>
-        <button onclick="App.saveInvoice()" class="btn-nav" data-t="navSave">Save</button>
-        <button onclick="App.showSavedModal()" class="btn-nav" data-t="navHistory">History</button>
-        <div class="w-px h-5 bg-slate-200 mx-0.5 hidden md:block"></div>
-        <button onclick="App.printInvoice()" class="btn-nav-secondary hidden md:inline-block" data-t="navPrint">Print</button>
-        <button onclick="App.exportPDF()" class="btn-primary" data-t="navPDF">Export PDF</button>
-        <button onclick="App.showPricing()" class="btn-upgrade" data-t="navUpgrade">Upgrade Pro</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main -->
-  <div class="main-layout">
-
-    <!-- Form Panel -->
-    <div id="form-panel" class="form-panel">
-
-      <!-- Invoice Details -->
-      <section>
-        <h3 class="section-title" data-t="secDetails">Invoice Details</h3>
-        <div class="grid grid-cols-4 gap-2.5">
-          <div><label class="field-label" data-t="lblNumber">Invoice #</label><input id="inv-number" type="text" value="INV-001" class="field-input" oninput="App.update()"></div>
-          <div><label class="field-label" data-t="lblDate">Date</label><input id="inv-date" type="date" class="field-input" oninput="App.update()"></div>
-          <div><label class="field-label" data-t="lblDue">Due Date</label><input id="inv-due" type="date" class="field-input" oninput="App.update()"></div>
-          <div><label class="field-label" data-t="lblCurrency">Currency</label>
-            <select id="inv-currency" class="field-input" onchange="App.update()">
-              <option value="USD">USD ($)</option><option value="EUR">EUR (&euro;)</option>
-              <option value="GBP">GBP (&pound;)</option><option value="CNY">CNY (&yen;)</option>
-              <option value="JPY">JPY (&yen;)</option><option value="KRW">KRW (&#8361;)</option>
-              <option value="HKD">HKD (HK$)</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <!-- Template -->
-      <section>
-        <h3 class="section-title" data-t="lblTemplate">Template</h3>
-        <div class="flex gap-2.5">
-          <button onclick="App.setTemplate('modern')" id="tpl-modern" class="tpl-btn active">
-            <div class="w-full h-14 rounded bg-gradient-to-br from-brand-500 to-brand-700 mb-1"></div>
-            <span class="text-xs" data-t="tplModern">Modern</span>
-          </button>
-          <button onclick="App.setTemplate('classic')" id="tpl-classic" class="tpl-btn relative">
-            <div class="w-full h-14 rounded border-2 border-slate-300 mb-1"></div>
-            <span class="text-xs" data-t="tplClassic">Classic</span>
-            <span class="tpl-pro-badge" id="badge-classic">PRO</span>
-          </button>
-          <button onclick="App.setTemplate('minimal')" id="tpl-minimal" class="tpl-btn relative">
-            <div class="w-full h-14 rounded border border-slate-200 bg-slate-50 mb-1"></div>
-            <span class="text-xs" data-t="tplMinimal">Minimal</span>
-            <span class="tpl-pro-badge" id="badge-minimal">PRO</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Logo -->
-      <section>
-        <h3 class="section-title" data-t="lblLogo">Company Logo</h3>
-        <div class="flex items-center gap-3">
-          <div id="logo-preview" class="w-14 h-14 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center text-slate-400 text-[10px] cursor-pointer" onclick="document.getElementById('logo-upload').click()" data-t="btnUpload">Upload</div>
-          <input type="file" id="logo-upload" accept="image/*" class="hidden" onchange="App.uploadLogo(event)">
-          <button onclick="App.removeLogo()" class="text-xs text-slate-400 hover:text-red-500" data-t="btnRemove">Remove</button>
-        </div>
-      </section>
-
-      <!-- From / To -->
-      <section class="grid grid-cols-2 gap-5">
-        <div>
-          <h3 class="section-title" data-t="secFrom">From</h3>
-          <div class="space-y-1.5">
-            <input id="from-name" type="text" class="field-input" data-t-ph="phName" placeholder="Company / Name" oninput="App.update()">
-            <input id="from-email" type="email" class="field-input" data-t-ph="phEmail" placeholder="Email" oninput="App.update()">
-            <textarea id="from-address" class="field-input" rows="2" data-t-ph="phAddress" placeholder="Address" oninput="App.update()"></textarea>
-            <input id="from-phone" type="text" class="field-input" data-t-ph="phPhone" placeholder="Phone" oninput="App.update()">
-          </div>
-        </div>
-        <div>
-          <h3 class="section-title" data-t="secTo">Bill To</h3>
-          <div class="space-y-1.5">
-            <input id="to-name" type="text" class="field-input" data-t-ph="phClient" placeholder="Client Name" oninput="App.update()">
-            <input id="to-email" type="email" class="field-input" data-t-ph="phEmail" placeholder="Email" oninput="App.update()">
-            <textarea id="to-address" class="field-input" rows="2" data-t-ph="phAddress" placeholder="Address" oninput="App.update()"></textarea>
-            <input id="to-phone" type="text" class="field-input" data-t-ph="phPhone" placeholder="Phone" oninput="App.update()">
-          </div>
-        </div>
-      </section>
-
-      <!-- Line Items -->
-      <section>
-        <div class="flex items-center justify-between mb-1.5">
-          <h3 class="section-title mb-0" data-t="secItems">Line Items</h3>
-          <button onclick="App.addItem()" class="text-sm text-brand-600 hover:text-brand-700 font-medium" data-t="btnAddItem">+ Add Item</button>
-        </div>
-        <div class="border rounded-lg overflow-hidden">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="bg-slate-50 text-slate-500">
-                <th class="text-left py-2 px-2 font-medium w-[44%]" data-t="colDesc">Description</th>
-                <th class="text-right py-2 px-2 font-medium w-[14%]" data-t="colQty">Qty</th>
-                <th class="text-right py-2 px-2 font-medium w-[18%]" data-t="colRate">Rate</th>
-                <th class="text-right py-2 px-2 font-medium w-[18%]" data-t="colAmount">Amount</th>
-                <th class="w-[6%]"></th>
-              </tr>
-            </thead>
-            <tbody id="items-body"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Tax & Discount -->
-      <section class="grid grid-cols-3 gap-3">
-        <div><label class="field-label" data-t="lblTax">Tax Rate (%)</label><input id="inv-tax" type="number" value="0" min="0" max="100" step="0.5" class="field-input" oninput="App.update()"></div>
-        <div><label class="field-label" data-t="lblDiscount">Discount</label><input id="inv-discount" type="number" value="0" min="0" step="0.01" class="field-input" oninput="App.update()"></div>
-        <div><label class="field-label" data-t="lblDiscType">Discount Type</label>
-          <select id="discount-type" class="field-input" onchange="App.update()">
-            <option value="amount" data-t="optFixed">Fixed Amount</option>
-            <option value="percent" data-t="optPercent">Percentage (%)</option>
-          </select>
-        </div>
-      </section>
-
-      <!-- Notes -->
-      <section>
-        <h3 class="section-title" data-t="secNotes">Notes</h3>
-        <textarea id="inv-notes" class="field-input" rows="2" data-t-ph="phNotes" placeholder="Payment terms..." oninput="App.update()"></textarea>
-      </section>
-
-      <!-- Payment Details -->
-      <section>
-        <h3 class="section-title" data-t="secPayment">Payment Info</h3>
-        <div class="space-y-1.5">
-          <select id="pay-method" class="field-input" onchange="App.togglePaymentFields()">
-            <option value="" data-t="optNone">-- None --</option>
-            <option value="bank" data-t="optBank">Bank Transfer</option>
-            <option value="paypal" data-t="optPaypal">PayPal</option>
-            <option value="other" data-t="optOther">Other</option>
-          </select>
-          <div id="pay-bank-fields" class="space-y-1.5 hidden">
-            <input id="pay-bank-name" type="text" class="field-input" data-t-ph="phBankName" placeholder="Bank Name" oninput="App.update()">
-            <input id="pay-account" type="text" class="field-input" data-t-ph="phAccount" placeholder="Account / IBAN" oninput="App.update()">
-            <input id="pay-swift" type="text" class="field-input" data-t-ph="phSwift" placeholder="SWIFT / BIC" oninput="App.update()">
-          </div>
-          <div id="pay-paypal-fields" class="hidden">
-            <input id="pay-paypal-email" type="email" class="field-input" data-t-ph="phPaypalEmail" placeholder="PayPal Email" oninput="App.update()">
-          </div>
-          <div id="pay-other-fields" class="hidden">
-            <textarea id="pay-custom" class="field-input" rows="2" data-t-ph="phCustomPay" placeholder="Custom payment info..." oninput="App.update()"></textarea>
-          </div>
-        </div>
-      </section>
-
-      <div class="h-4"></div>
-    </div>
-
-    <!-- Preview Panel -->
-    <div id="preview-panel" class="preview-panel">
-      <div class="my-auto">
-        <div id="invoice-preview" class="bg-white shadow-2xl" style="width:595px;min-height:842px;border-radius:4px"></div>
-      </div>
+<body>
+<header>
+  <div class="brand"><i>◈</i><span data-t="app">فاکتورساز</span></div>
+  <div class="acts">
+    <select class="lang" id="lang"><option value="fa">فارسی</option><option value="en">English</option></select>
+    <button class="btn b-soft" id="newB" data-t="new">فاکتور جدید</button>
+    <button class="btn b-soft" id="saveB" data-t="save">ذخیره</button>
+    <button class="btn b-soft" id="prB" data-t="print">PDF / چاپ</button>
+    <button class="btn b-main" id="imgB" data-t="img">دریافت عکس HD</button>
+  </div>
+</header>
+<main class="wrap">
+<section class="form">
+  <div class="card">
+    <h2 data-t="style">ظاهر فاکتور</h2>
+    <div class="pills" id="swatches"></div>
+    <div class="grid" style="margin-top:12px">
+      <div class="field"><label data-t="status">وضعیت پرداخت</label><select id="status"><option value="paid">پرداخت‌شده</option><option value="pending">در انتظار پرداخت</option><option value="overdue">معوق</option><option value="">بدون وضعیت</option></select></div>
+      <div class="field"><label data-t="logo">لوگو</label><div class="logoBox"><img id="logoPrev"><input type="file" id="logo" accept="image/*"></div></div>
     </div>
   </div>
-
-  <!-- Pricing Modal -->
-  <div id="pricing-modal" class="modal-overlay hidden">
-    <div class="modal-content max-w-3xl">
-      <div class="flex items-center justify-between mb-5">
-        <h2 class="text-xl font-bold text-slate-800" data-t="titlePlans">Choose Your Plan</h2>
-        <button onclick="App.closePricing()" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
-      </div>
-      <div id="pricing-body" class="grid grid-cols-3 gap-5"></div>
-      <div class="mt-5 pt-5 border-t border-slate-200">
-        <p class="text-sm text-slate-500 mb-2" data-t="lblLicense">Already have a license key?</p>
-        <div class="flex gap-2">
-          <input id="license-key" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" data-t-ph="phLicense" class="field-input flex-1" maxlength="19" oninput="this.value=this.value.toUpperCase()">
-          <button onclick="App.activateLicense(document.getElementById('license-key').value)" class="btn-primary px-6" data-t="btnActivate">Activate</button>
-        </div>
-      </div>
+  <div class="card">
+    <h2 data-t="details">مشخصات فاکتور</h2>
+    <div class="grid">
+      <div class="field"><label data-t="number">شماره فاکتور</label><input id="number" value="INV-001"></div>
+      <div class="field"><label data-t="currency">واحد پول</label><select id="currency"><option>تومان</option><option>ریال</option><option>USD</option><option>EUR</option></select></div>
+      <div class="field"><label data-t="date">تاریخ (شمسی)</label><input id="date" class="dt" readonly></div>
+      <div class="field"><label data-t="due">سررسید (شمسی)</label><input id="due" class="dt" readonly></div>
     </div>
   </div>
-
-  <!-- Saved Invoices Modal -->
-  <div id="saved-modal" class="modal-overlay hidden">
-    <div class="modal-content max-w-xl">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-bold text-slate-800" data-t="titleSaved">Saved Invoices</h2>
-        <button onclick="App.closeSavedModal()" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
-      </div>
-      <div id="saved-list" class="space-y-2 max-h-96 overflow-y-auto"></div>
-      <p id="no-saved" class="text-center text-slate-400 py-8 hidden" data-t="txtNoSaved">No saved invoices</p>
+  <div class="card">
+    <h2 data-t="parties">اطلاعات طرفین</h2>
+    <div class="grid">
+      <div><div class="field"><label data-t="seller">فروشنده</label><input id="seller"></div><div class="field"><label data-t="sInfo">تلفن و نشانی فروشنده</label><textarea id="sellerInfo"></textarea></div></div>
+      <div><div class="field"><label data-t="buyer">خریدار</label><input id="buyer"></div><div class="field"><label data-t="bInfo">تلفن و نشانی خریدار</label><textarea id="buyerInfo"></textarea></div></div>
     </div>
   </div>
-
-  <script src="app.js"></script>
+  <div class="card">
+    <h2 data-t="items">اقلام فاکتور</h2>
+    <div class="ih"><span data-t="desc">شرح</span><span data-t="qty">تعداد</span><span data-t="price">قیمت واحد</span><span data-t="amount">مبلغ</span><span></span></div>
+    <div id="items"></div>
+    <button class="btn b-main" id="addB" data-t="add">+ افزودن ردیف</button>
+  </div>
+  <div class="card">
+    <h2 data-t="adj">تخفیف و مالیات</h2>
+    <div class="grid">
+      <div class="field"><label data-t="discount">تخفیف</label><input id="discount" type="number" min="0" value="0"></div>
+      <div class="field"><label data-t="tax">مالیات (%)</label><input id="tax" type="number" min="0" max="100" value="0"></div>
+    </div>
+    <div class="field"><label data-t="notes">توضیحات / شرایط پرداخت</label><textarea id="notes"></textarea></div>
+  </div>
+</section>
+<section class="preview">
+  <div class="ptop"><h2 style="margin:0" data-t="preview">پیش‌نمایش زنده</h2>
+    <select id="scale" style="width:auto;border-radius:999px;padding:8px 14px"><option value="2">کیفیت 2×</option><option value="3" selected>کیفیت 3× (HD)</option><option value="4">کیفیت 4× (Ultra)</option></select></div>
+  <div class="pv"><article class="paper" id="paper">
+    <div class="ph">
+      <div><img id="pLogo"><h1 data-t="invoice">فاکتور</h1><p id="pSeller"></p></div>
+      <div class="meta"><div><b data-t="number">شماره</b>: <span id="pNumber"></span></div><div><b data-t="date">تاریخ</b>: <span id="pDate"></span></div><div><b data-t="due">سررسید</b>: <span id="pDue"></span></div><span class="badge" id="pStatus"></span></div>
+    </div>
+    <div class="pb">
+      <div class="parties"><div class="pbox"><h3 data-t="from">صادرکننده</h3><p id="pFrom"></p></div><div class="pbox"><h3 data-t="to">صورتحساب برای</h3><p id="pTo"></p></div></div>
+      <table><thead><tr><th data-t="desc">شرح</th><th class="n" data-t="qty">تعداد</th><th class="n" data-t="price">قیمت واحد</th><th class="n" data-t="amount">مبلغ</th></tr></thead><tbody id="pItems"></tbody></table>
+      <div class="tot"><div class="tr"><span data-t="sub">جمع جزء</span><b id="pSub"></b></div><div class="tr"><span data-t="discount">تخفیف</span><b id="pDisc"></b></div><div class="tr"><span data-t="taxA">مالیات</span><b id="pTax"></b></div><div class="tr f"><span data-t="total">مبلغ نهایی</span><b id="pTotal"></b></div></div>
+      <div class="notes" id="pNotes"></div>
+      <div class="foot" data-t="thanks">از اعتماد شما سپاسگزاریم.</div>
+    </div>
+  </article></div>
+</section>
+</main>
+<button class="fab" id="fab" title="+">+</button>
+<div class="ov" id="ov"><div class="cal">
+  <div class="ch"><button class="nav" id="nx">›</button><span id="ct"></span><button class="nav" id="pv">‹</button></div>
+  <div class="cg" id="cg"></div>
+  <div class="cf"><button class="btn b-soft" id="cToday">امروز</button><button class="btn b-soft" id="cClose">بستن</button></div>
+</div></div>
+<div class="stage" id="stage"></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const T={fa:{app:"فاکتورساز",new:"فاکتور جدید",save:"ذخیره",print:"PDF / چاپ",img:"دریافت عکس HD",style:"ظاهر فاکتور",status:"وضعیت پرداخت",logo:"لوگو",details:"مشخصات فاکتور",number:"شماره فاکتور",currency:"واحد پول",date:"تاریخ (شمسی)",due:"سررسید (شمسی)",parties:"اطلاعات طرفین",seller:"فروشنده",sInfo:"تلفن و نشانی فروشنده",buyer:"خریدار",bInfo:"تلفن و نشانی خریدار",items:"اقلام فاکتور",desc:"شرح",qty:"تعداد",price:"قیمت واحد",amount:"مبلغ",add:"+ افزودن ردیف",adj:"تخفیف و مالیات",discount:"تخفیف",tax:"مالیات (%)",notes:"توضیحات / شرایط پرداخت",preview:"پیش‌نمایش زنده",invoice:"فاکتور",from:"صادرکننده",to:"صورتحساب برای",sub:"جمع جزء",taxA:"مالیات",total:"مبلغ نهایی",thanks:"از اعتماد شما سپاسگزاریم.",saved:"ذخیره شد.",clear:"فاکتور فعلی پاک شود؟",ph:"شرح کالا یا خدمت",st:{paid:"پرداخت‌شده",pending:"در انتظار پرداخت",overdue:"معوق"},today:"امروز",close:"بستن"},
+en:{app:"Invoice Maker",new:"New",save:"Save",print:"PDF / Print",img:"Get HD image",style:"Look",status:"Payment status",logo:"Logo",details:"Invoice details",number:"Invoice no.",currency:"Currency",date:"Date (Jalali)",due:"Due (Jalali)",parties:"Parties",seller:"Seller",sInfo:"Seller phone & address",buyer:"Buyer",bInfo:"Buyer phone & address",items:"Items",desc:"Description",qty:"Qty",price:"Unit price",amount:"Amount",add:"+ Add row",adj:"Discount & tax",discount:"Discount",tax:"Tax (%)",notes:"Notes / payment terms",preview:"Live preview",invoice:"INVOICE",from:"FROM",to:"BILL TO",sub:"Subtotal",taxA:"Tax",total:"Total due",thanks:"Thank you for your business.",saved:"Saved.",clear:"Clear current invoice?",ph:"Item or service",st:{paid:"Paid",pending:"Pending",overdue:"Overdue"},today:"Today",close:"Close"}};
+let lang="fa";const tr=k=>T[lang][k];
+const FD="۰۱۲۳۴۵۶۷۸۹",fd=s=>lang==="fa"?String(s).replace(/\d/g,d=>FD[d]):String(s);
+const fn=n=>fd(new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n||0));
+const money=n=>fn(n)+" "+$("currency").value;
+/* Jalali */
+const fl=Math.floor;
+function g2j(gy,gm,gd){const m=[0,31,59,90,120,151,181,212,243,273,304,334],g2=gm>2?gy+1:gy;let d=355666+365*gy+fl((g2+3)/4)-fl((g2+99)/100)+fl((g2+399)/400)+gd+m[gm-1],jy=-1595+33*fl(d/12053);d%=12053;jy+=4*fl(d/1461);d%=1461;if(d>365){jy+=fl((d-1)/365);d=(d-1)%365}return[jy,d<186?1+fl(d/31):7+fl((d-186)/30),1+(d<186?d%31:(d-186)%30)]}
+function j2g(jy,jm,jd){jy+=1595;let d=-355668+365*jy+fl(jy/33)*8+fl(((jy%33)+3)/4)+jd+(jm<7?(jm-1)*31:(jm-7)*30+186),gy=400*fl(d/146097);d%=146097;if(d>36524){gy+=100*fl(--d/36524);d%=36524;if(d>=365)d++}gy+=4*fl(d/1461);d%=1461;if(d>365){gy+=fl((d-1)/365);d=(d-1)%365}let gd=d+1;const s=[0,31,(gy%4==0&&gy%100!=0)||gy%400==0?29:28,31,30,31,30,31,31,30,31,30,31];let gm;for(gm=0;gm<13&&gd>s[gm];gm++)gd-=s[gm];return[gy,gm,gd]}
+const mLen=(y,m)=>m<7?31:m<12?30:(g2j(...j2g(y,12,30))[2]===30&&g2j(...j2g(y,12,30))[1]===12?30:29);
+const MN=["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
+const pad=n=>String(n).padStart(2,"0");
+const jToday=(add=0)=>{const d=new Date();d.setDate(d.getDate()+add);const j=g2j(d.getFullYear(),d.getMonth()+1,d.getDate());return j[0]+"/"+pad(j[1])+"/"+pad(j[2])};
+/* calendar */
+let cy,cm,tgt,sel;
+function drawCal(){$("ct").textContent=MN[cm-1]+" "+fd(cy);const g=$("cg");g.innerHTML="";"شیدسچپج".split("").forEach(x=>{const b=document.createElement("b");b.textContent=x;g.append(b)});
+const[gy,gm,gd]=j2g(cy,cm,1),off=(new Date(gy,gm-1,gd).getDay()+1)%7,tdy=jToday();
+for(let i=0;i<off;i++)g.append(document.createElement("span"));
+for(let d=1;d<=mLen(cy,cm);d++){const b=document.createElement("button"),k=cy+"/"+pad(cm)+"/"+pad(d);b.textContent=fd(d);b.className="cd"+(k===tdy?" today":"")+(k===sel?" sel":"")+((off+d-1)%7===6?" fri":"");b.onclick=()=>{tgt.value=k;$("ov").classList.remove("on");render()};g.append(b)}}
+function openCal(el){tgt=el;sel=el.value;const p=(sel||jToday()).split("/").map(Number);cy=p[0];cm=p[1];drawCal();$("ov").classList.add("on")}
+$("nx").onclick=()=>{cm++;if(cm>12){cm=1;cy++}drawCal()};$("pv").onclick=()=>{cm--;if(cm<1){cm=12;cy--}drawCal()};
+$("cClose").onclick=()=>$("ov").classList.remove("on");$("ov").onclick=e=>{if(e.target.id==="ov")$("ov").classList.remove("on")};
+$("cToday").onclick=()=>{tgt.value=jToday();$("ov").classList.remove("on");render()};
+["date","due"].forEach(i=>$(i).onclick=e=>openCal(e.target));
+/* theme */
+const COL=[["#4f46e5","#818cf8"],["#0f9d6a","#5fd3a6"],["#e8590c","#ffa94d"],["#d6336c","#f783ac"],["#1c7ed6","#74c0fc"],["#2b2d42","#6c6f93"]];let ci=0;
+function drawSw(){const s=$("swatches");s.innerHTML="";COL.forEach((c,i)=>{const b=document.createElement("button");b.className="pill sw"+(i===ci?" on":"");b.style.background=`linear-gradient(135deg,${c[1]},${c[0]})`;b.onclick=()=>{ci=i;setCol();drawSw()};s.append(b)})}
+function setCol(){document.documentElement.style.setProperty("--ac",COL[ci][0]);document.documentElement.style.setProperty("--ac2",COL[ci][1])}
+/* logo */
+let logo="";
+$("logo").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{logo=r.result;render()};r.readAsDataURL(f)};
+/* items */
+function addRow(d="",q=1,p=0){const r=document.createElement("div");r.className="ir";r.innerHTML=`<input class="d" placeholder="${tr("ph")}"><input class="q" type="number" min="0" value="${q}"><input class="p" type="number" min="0" step="any" value="${p}"><input class="a" readonly><button class="rm" type="button">×</button>`;r.querySelector(".d").value=d;r.querySelector(".rm").onclick=()=>{r.remove();if(!$("items").children.length)addRow();render()};r.querySelectorAll("input").forEach(i=>i.oninput=render);$("items").append(r);render()}
+const v=id=>$(id).value.trim();
+function render(){
+let sub=0;const tb=$("pItems");tb.innerHTML="";
+[...$("items").children].forEach(r=>{const d=r.querySelector(".d").value,q=+r.querySelector(".q").value||0,p=+r.querySelector(".p").value||0,a=q*p;sub+=a;r.querySelector(".a").value=money(a);const tr_=document.createElement("tr");[d||"—",fn(q),money(p),money(a)].forEach((x,i)=>{const td=document.createElement("td");td.textContent=x;if(i)td.className="n";tr_.append(td)});tb.append(tr_)});
+const disc=Math.min(Math.max(0,+$("discount").value||0),sub),base=sub-disc,tax=base*Math.max(0,+$("tax").value||0)/100;
+$("pSeller").textContent=v("seller");$("pNumber").textContent=fd(v("number"));$("pDate").textContent=fd(v("date"));$("pDue").textContent=fd(v("due"));
+$("pFrom").textContent=[v("seller"),v("sellerInfo")].filter(Boolean).join("\n");$("pTo").textContent=[v("buyer"),v("buyerInfo")].filter(Boolean).join("\n");
+$("pSub").textContent=money(sub);$("pDisc").textContent=money(disc);$("pTax").textContent=money(tax);$("pTotal").textContent=money(base+tax);$("pNotes").textContent=v("notes");
+const s=$("status").value,b=$("pStatus");b.style.display=s?"inline-block":"none";b.className="badge s-"+s;b.textContent=s?tr("st")[s]:"";
+["pLogo","logoPrev"].forEach(i=>{$(i).src=logo;$(i).style.display=logo?"block":"none"});
+}
+function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==="fa"?"rtl":"ltr";document.querySelectorAll("[data-t]").forEach(e=>e.textContent=tr(e.dataset.t));$("cToday").textContent=tr("today");$("cClose").textContent=tr("close");
+const o=$("status").options;["paid","pending","overdue"].forEach((k,i)=>o[i].textContent=tr("st")[k]);document.querySelectorAll(".d").forEach(i=>i.placeholder=tr("ph"));render()}
+/* save/load */
+function save(){const d={lang,ci,logo,f:{},rows:[...$("items").children].map(r=>[r.querySelector(".d").value,r.querySelector(".q").value,r.querySelector(".p").value])};document.querySelectorAll(".form input,.form textarea,.form select").forEach(e=>{if(e.id&&e.type!=="file")d.f[e.id]=e.value});try{localStorage.setItem("faktorsaz2",JSON.stringify(d));alert(tr("saved"))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem("faktorsaz2"));if(!d)throw 0;lang=d.lang||"fa";ci=d.ci||0;logo=d.logo||"";Object.entries(d.f).forEach(([k,x])=>{if($(k))$(k).value=x});(d.rows||[]).forEach(r=>addRow(...r));if(!d.rows.length)addRow()}catch(e){$("date").value=jToday();$("due").value=jToday(14);$("items").innerHTML="";addRow()}}
+/* export */
+async function toImage(){const btn=$("imgB"),old=btn.textContent;btn.textContent="...";
+try{const st=$("stage");st.innerHTML="";const c=$("paper").cloneNode(true);c.style.width="794px";c.style.borderRadius="0";c.style.boxShadow="none";st.append(c);
+if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+const cv=await html2canvas(c,{scale:+$("scale").value,backgroundColor:"#ffffff",useCORS:true,logging:false});st.innerHTML="";
+const a=document.createElement("a");a.download=("invoice-"+(v("number")||"1")).replace(/[^\w-]/g,"")+".png";a.href=cv.toDataURL("image/png");document.body.append(a);a.click();a.remove()}
+catch(e){alert("Export failed. Check internet connection (html2canvas).")}btn.textContent=old}
+$("imgB").onclick=toImage;$("prB").onclick=()=>window.print();$("saveB").onclick=save;
+$("addB").onclick=$("fab").onclick=()=>addRow();
+$("lang").onchange=e=>{lang=e.target.value;applyLang()};
+$("newB").onclick=()=>{if(!confirm(tr("clear")))return;document.querySelectorAll(".form input,.form textarea").forEach(e=>{if(e.type==="number")e.value=0;else if(e.type!=="file")e.value=""});$("number").value="INV-001";$("date").value=jToday();$("due").value=jToday(14);logo="";$("items").innerHTML="";addRow()};
+document.querySelectorAll(".form input,.form textarea,.form select").forEach(e=>e.addEventListener("input",render));
+$("status").onchange=render;$("currency").onchange=render;
+load();setCol();drawSw();$("lang").value=lang;applyLang();
+})();
+</script>
 </body>
 </html>
